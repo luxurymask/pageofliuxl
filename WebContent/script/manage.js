@@ -6,7 +6,7 @@
 
 function submitIntoDB() {
 	var title = $("#titleInput").val();
-	var content = $("#contentTextArea").val();
+	var content = CKEDITOR.instances.contentTextArea.getData();
 	$.ajax({
 		type : "POST",
 		data : {flag:true, title:title, content:content},

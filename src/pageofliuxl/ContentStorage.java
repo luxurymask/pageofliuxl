@@ -1,11 +1,13 @@
 package pageofliuxl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.sun.istack.internal.NotNull;
 
 public class ContentStorage {
 
@@ -22,6 +24,22 @@ public class ContentStorage {
 		long timestamp = System.currentTimeMillis();
 		document.put("timestamp", timestamp);
 		collection.insertOne(document);
+	}
+	
+	public Map<String, String> readAll(){
+		Map<String, String> resultMap = new HashMap<>();
+		Document document = new Document();
+		Document sortType = new Document();
+		sortType.put("timestamp", -1);
+		MongoCursor<Document> cursor = collection.find(document).sort(sortType).iterator();
+		while (cursor.hasNext()) {
+			Document result = cursor.next();
+			String title = result.getString("title");
+			String content = result.getString("content");
+			resultMap.put(title, content);
+		}
+		cursor.close();
+		return resultMap;
 	}
 	
 	private ContentStorage() {

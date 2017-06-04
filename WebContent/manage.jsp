@@ -10,8 +10,10 @@
 </head>
 <body>
 	<input id="titleInput"></input>
-	<textarea id="contentTextArea"></textarea>
+	<textarea id="contentTextArea" class="ckeditor"></textarea>
+	<script type="text/JavaScript">CKEDITOR.replace('contentTextArea');</script>
 	<button class="button" id="submitButton" onclick="submitIntoDB()">submit</button>
+	<script type="text/JavaScript" src="ckeditor/ckeditor.js"></script>
 	<script src="script/jquery.js"></script>
 	<script src="script/manage.js"></script>
 </body>
