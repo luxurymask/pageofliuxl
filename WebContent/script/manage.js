@@ -5,10 +5,11 @@
  */
 
 function submitIntoDB() {
-	var content = $("#textArea").val();
+	var title = $("#titleInput").val();
+	var content = $("#contentTextArea").val();
 	$.ajax({
 		type : "POST",
-		data : {content:content},
+		data : {flag:true, title:title, content:content},
 		success : function(msg) {
 			alert("Data Saved: " + content);
 		}

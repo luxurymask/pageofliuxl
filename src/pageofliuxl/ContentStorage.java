@@ -15,9 +15,9 @@ public class ContentStorage {
 
 	public static final String MONGODB_SERVER = "127.0.0.1:27017";
 	
-	public void save(String userId, String content) {
+	public void save(String title, String content) {
 		Document document = new Document();
-		document.put("userId", userId);
+		document.put("title", title);
 		document.put("content", content);
 		long timestamp = System.currentTimeMillis();
 		document.put("timestamp", timestamp);
