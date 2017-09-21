@@ -1,9 +1,11 @@
 package pageofliuxl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.bson.Document;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -26,20 +28,26 @@ public class ContentStorage {
 		collection.insertOne(document);
 	}
 	
-	public Map<String, String> readAll(){
-		Map<String, String> resultMap = new HashMap<>();
+	public JSONArray readAll(){
+		JSONArray jsonArray = new JSONArray();
 		Document document = new Document();
 		Document sortType = new Document();
 		sortType.put("timestamp", -1);
 		MongoCursor<Document> cursor = collection.find(document).sort(sortType).iterator();
 		while (cursor.hasNext()) {
+			JSONObject jsonObject = new JSONObject();
 			Document result = cursor.next();
-			String title = result.getString("title");
-			String content = result.getString("content");
-			resultMap.put(title, content);
+			jsonObject.put("id", result.get("_id").toString());
+			jsonObject.put("title", result.getString("title"));
+			jsonObject.put("content", result.getString("content"));
+	        Date date = new Date(result.getLong("timestamp"));
+	        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        String time = simpleDateFormat.format(date);
+			jsonObject.put("time", time);
+			jsonArray.put(jsonObject);
 		}
 		cursor.close();
-		return resultMap;
+		return jsonArray;
 	}
 	
 	private ContentStorage() {
