@@ -42,6 +42,10 @@ span.s2 {
 	font-kerning: none
 }
 
+#main_bio {
+	
+}
+
 #main_avatar {
     width: 100px;
     height: 100px;
@@ -54,6 +58,8 @@ span.s2 {
 	<div align="center"><h1
 		style="margin: 0.0px 0.0px 16.1px 0.0px; line-height: 28.0px; font: 24.0px Times; color: #000000; -webkit-text-stroke: #000000">
 		<span id="main_title"><b>Liuxl's Blog</b></span>
+		<p></p>
+		<span id="main_bio">他们没有砍过一棵正在生长的树, 孩子们也没有摘过一朵正在盛开的花。</span>
 	</h1></div>
 	<p></p>
 	<%
