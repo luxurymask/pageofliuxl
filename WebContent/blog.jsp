@@ -47,37 +47,55 @@ span.s2 {
 }
 
 #main_avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
 }
 </style>
 </head>
 <body>
-	<p><div align="center"><img id="main_avatar" alt="liuxl" src="http://localhost:8080/pageofliuxl/imgs/avatar.jpg"></div></p>
-	<div align="center"><h1
-		style="margin: 0.0px 0.0px 16.1px 0.0px; line-height: 28.0px; font: 24.0px Times; color: #000000; -webkit-text-stroke: #000000">
-		<span id="main_title"><b>Liuxl's Blog</b></span>
+	<p>
+	<div align="center">
+		<img id="main_avatar" alt="liuxl"
+			src="http://localhost:8080/pageofliuxl/imgs/avatar.jpg">
+	</div>
+	</p>
+	<div align="center">
+		<h1
+			style="margin: 0.0px 0.0px 16.1px 0.0px; line-height: 28.0px; font: 24.0px Times; color: #000000; -webkit-text-stroke: #000000">
+			<span id="main_title"><b>Liuxl's Blog</b></span>
+			<p></p>
+			<span id="main_bio">他们没有砍过一棵正在生长的树, 孩子们也没有摘过一朵正在盛开的花。</span>
+		</h1>
+	</div>
+	<div align="center">
 		<p></p>
-		<span id="main_bio">他们没有砍过一棵正在生长的树, 孩子们也没有摘过一朵正在盛开的花。</span>
-	</h1></div>
-	<p></p>
-	<%
-		for(int i = 0;i < jsonArray.length();i++){
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			String id = jsonObject.getString("id");
-			String title = jsonObject.getString("title");
-			String content = jsonObject.getString("content");
-			String time = jsonObject.getString("time");
-	%>
-		<p><b class="article_title"><%=title %></b></p>
-		<p><b><%=id %></b> | <b><%=time %></b></p>
-		<p><%=content %></p>
-		<p></p>
-		<p>-------------------------------------------------------------------------------------</p>
-		<p></p>
-	<%
-		}
-	%>
+		<%
+			long visitTimestamp = System.currentTimeMillis();
+		%>
+		<%
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				String id = jsonObject.getString("id");
+				String title = jsonObject.getString("title");
+				String content = jsonObject.getString("content");
+				String time = jsonObject.getString("time");
+		%>
+		<div align="left">
+			<p>
+				<b class="article_title"><%=title%></b>
+			</p>
+			<p>
+				<b><%=id%></b> | <b><%=time%></b>
+			</p>
+			<p><%=content%></p>
+			<p></p>
+			<p>-------------------------------------------------------------------------------------</p>
+			<p></p>
+		</div>
+		<%
+			}
+		%>
+	</div>
 </body>
 </html>

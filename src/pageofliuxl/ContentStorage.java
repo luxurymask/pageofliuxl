@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,7 +14,7 @@ import com.mongodb.client.MongoCursor;
 
 public class ContentStorage {
 
-	protected MongoCollection collection = null;
+	protected MongoCollection<Document> collection = null;
 
 	public static final ContentStorage instance = new ContentStorage();
 
@@ -26,6 +27,31 @@ public class ContentStorage {
 		long timestamp = System.currentTimeMillis();
 		document.put("timestamp", timestamp);
 		collection.insertOne(document);
+	}
+	
+	public void save(String id, String title, String content) {
+		Document documentOld = new Document();
+		documentOld.put("_id", new ObjectId(id));
+		Document document = new Document();
+		document.put("title", title);
+		document.put("content", content);
+		long timestamp = System.currentTimeMillis();
+		document.put("timestamp", timestamp);
+		Document documentNew = new Document("$set", document);
+		collection.updateOne(documentOld, documentNew);
+	}
+	
+	public JSONObject read(String id){
+		Document document = new Document();
+		document.put("_id", new ObjectId(id));
+		MongoCursor<Document> cursor = collection.find(document).iterator();
+		JSONObject jsonObject = new JSONObject();
+		if(cursor.hasNext()){
+			Document result = cursor.next();
+			jsonObject.put("title", result.getString("title"));
+			jsonObject.put("content", result.getString("content"));
+		}
+		return jsonObject;
 	}
 	
 	public JSONArray readAll(){
