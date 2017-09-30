@@ -16,6 +16,7 @@ function submitIntoDB() {
 		},
 		success : function(msg) {
 			alert("Data Saved: " + content);
+			window.location.href="manage_bloglist.jsp";
 		}
 	});
 }

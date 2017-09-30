@@ -1,4 +1,5 @@
 <%@page import="pageofliuxl.ContentStorage"%>
+<%@page import="pageofliuxl.PVCounter"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,6 +17,7 @@
 </head>
 <body>
 	<button class="button" id="newBlogButton" onclick="window.location.href='manage.jsp';">new blog</button>
+	<div>PV: <%= PVCounter.instance.getPV()%></div>
 	<%
 		for(int i = 0;i < jsonArray.length();i++){
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -28,6 +30,7 @@
 		<p></p>
 	<%
 		}
+		
 	%>
 </body>
 </html>

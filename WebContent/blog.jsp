@@ -1,4 +1,5 @@
 <%@page import="pageofliuxl.ContentStorage"%>
+<%@page import="pageofliuxl.PVCounter"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -54,10 +55,17 @@ span.s2 {
 </style>
 </head>
 <body>
+	<%
+		String clientIP = request.getRemoteAddr();
+		long timestamp = System.currentTimeMillis();
+		String pageURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()
+				+ request.getServletPath();
+		PVCounter.instance.setPV(clientIP, pageURL, timestamp);
+	%>
 	<p>
 	<div align="center">
 		<img id="main_avatar" alt="liuxl"
-			src="http://localhost:8080/pageofliuxl/imgs/avatar.jpg">
+			src="imgs/avatar.jpg">
 	</div>
 	</p>
 	<div align="center">
@@ -97,5 +105,19 @@ span.s2 {
 			}
 		%>
 	</div>
+	<div>
+		<input id="messageTitle" type= "text"></input>
+		<button class="button" id="messageButton" onclick="leaveMessage()">leave a message</button>
+		<p></p>
+		<textarea id="messageContent"></textarea>
+	</div>
 </body>
 </html>
+<%
+	String flag = request.getParameter("flag");
+	if (flag != null && flag.equals("true")) {
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+	}
+%>

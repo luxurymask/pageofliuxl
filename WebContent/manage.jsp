@@ -18,9 +18,9 @@
 		if (id != null && !id.equals("")) {
 			JSONObject jsonObject = ContentStorage.instance.read(id);
 			title = jsonObject.getString("title");
-			System.out.println(title);
 			content = jsonObject.getString("content");
 		}
+		
 	%>
 	<input id="titleInput" type= "text" value="<%= title%>"></input>
 	<textarea id="contentTextArea" class="ckeditor"><%=content%></textarea>
