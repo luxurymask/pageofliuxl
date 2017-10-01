@@ -1,4 +1,5 @@
 <%@page import="pageofliuxl.ContentStorage"%>
+<%@page import="pageofliuxl.MessageStorage"%>
 <%@page import="pageofliuxl.PVCounter"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
@@ -18,6 +19,7 @@
 <body>
 	<button class="button" id="newBlogButton" onclick="window.location.href='manage.jsp';">new blog</button>
 	<div>PV: <%= PVCounter.instance.getPV()%></div>
+	<div>Unread Message: <a href="message_list.jsp"><%= MessageStorage.instance.getUnreadMessageCount()%></a></div>
 	<%
 		for(int i = 0;i < jsonArray.length();i++){
 			JSONObject jsonObject = jsonArray.getJSONObject(i);

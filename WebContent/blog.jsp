@@ -1,4 +1,5 @@
 <%@page import="pageofliuxl.ContentStorage"%>
+<%@page import="pageofliuxl.MessageStorage"%>
 <%@page import="pageofliuxl.PVCounter"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
@@ -111,6 +112,8 @@ span.s2 {
 		<p></p>
 		<textarea id="messageContent"></textarea>
 	</div>
+	<script src="script/jquery.js"></script>
+	<script src="script/blog.js"></script>
 </body>
 </html>
 <%
@@ -118,6 +121,6 @@ span.s2 {
 	if (flag != null && flag.equals("true")) {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
+		MessageStorage.instance.save(clientIP, title, content, false);
 	}
 %>

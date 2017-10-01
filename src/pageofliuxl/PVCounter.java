@@ -14,13 +14,22 @@ public class PVCounter {
 	public static PVCounter instance = new PVCounter();
 	
 	protected volatile long pvCount;
-	protected volatile String newestId;
 	
 	private Object pvCountLock = new Object();
-	private Object newestIdLock = new Object();
 	
 	private PVCounter(){
 		collection = new MongoClient(MONGODB_SERVER).getDatabase("pageofliuxl_debug").getCollection("PV");
+		initPVCount();
+	}
+	
+	private void initPVCount(){
+		Document document = new Document();
+		Document sortType = new Document();
+		sortType.put("timestamp", -1);
+		MongoCursor<Document> cursor = collection.find(document).sort(sortType).iterator();
+		if(cursor.hasNext()){
+			pvCount = cursor.next().getLong("pvCount");
+		}
 	}
 	
 	public void setPV(String clientIP, String pageURL, long timestamp){
@@ -33,13 +42,6 @@ public class PVCounter {
 			document.put("pvCount", ++pvCount);
 			collection.insertOne(document);
 		}
-		MongoCursor<Document> cursor = collection.find(document).iterator();
-		if (cursor.hasNext()) {
-			synchronized(newestIdLock){
-				newestId = cursor.next().get("_id").toString();
-			}
-		}
-		cursor.close();
 	}
 	
 	public long getPV(){
