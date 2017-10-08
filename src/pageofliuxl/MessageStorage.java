@@ -58,13 +58,15 @@ public class MessageStorage {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time = simpleDateFormat.format(date);
 			jsonObject.put("time", time);
-			Document documentUpdate = new Document();
-			documentUpdate.put("_id", new ObjectId(id));
-			documentUpdate.put("flag", true);
-			Document documentNew = new Document("$set", documentUpdate);
-			collection.updateOne(document, documentNew);
-			synchronized(countLock){
-				unreadMessageCount--;
+			if(result.getBoolean("flag") == false){
+				Document documentUpdate = new Document();
+				documentUpdate.put("_id", new ObjectId(id));
+				documentUpdate.put("flag", true);
+				Document documentNew = new Document("$set", documentUpdate);
+				collection.updateOne(document, documentNew);
+				synchronized(countLock){
+					unreadMessageCount--;
+				}
 			}
 		}
 		cursor.close();

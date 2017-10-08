@@ -107,10 +107,10 @@ span.s2 {
 		%>
 	</div>
 	<div>
-		<input id="messageTitle" type= "text"></input>
-		<button class="button" id="messageButton" onclick="leaveMessage()">leave a message</button>
+		<input id="messageTitle" type= "text" style="width:30%; height:30px;"></input>
+		<button class="button" id="messageButton" onclick="leaveMessage()" style="height:30px;">leave a message</button>
 		<p></p>
-		<textarea id="messageContent"></textarea>
+		<textarea id="messageContent" style="width:70%; height:100px; resize:none;"></textarea>
 	</div>
 	<script src="script/jquery.js"></script>
 	<script src="script/blog.js"></script>
