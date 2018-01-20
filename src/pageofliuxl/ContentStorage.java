@@ -18,7 +18,7 @@ public class ContentStorage {
 
 	public static final ContentStorage instance = new ContentStorage();
 
-	public static final String MONGODB_SERVER = "127.0.0.1:27017";
+	public static final String MONGODB_SERVER = "localhost:27017";
 	
 	public void save(String title, String content) {
 		Document document = new Document();

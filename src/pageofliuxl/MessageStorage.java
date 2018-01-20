@@ -23,7 +23,7 @@ public class MessageStorage {
 
 	public static final MessageStorage instance = new MessageStorage();
 
-	public static final String MONGODB_SERVER = "127.0.0.1:27017";
+	public static final String MONGODB_SERVER = "localhost:27017";
 
 	public int getUnreadMessageCount() {
 		return unreadMessageCount;

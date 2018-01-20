@@ -9,7 +9,7 @@ import com.mongodb.client.MongoCursor;
 public class PVCounter {
 	protected MongoCollection<Document> collection = null;
 	
-	public static final String MONGODB_SERVER = "127.0.0.1:27017";
+	public static final String MONGODB_SERVER = "localhost:27017";
 	
 	public static PVCounter instance = new PVCounter();
 	
